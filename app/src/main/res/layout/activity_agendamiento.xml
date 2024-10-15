@@ -1,0 +1,110 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_agendamiento"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@drawable/img_3"
+    android:gravity="center">
+
+
+    <TextView
+        android:id="@+id/tv_titulo_agenda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Agendar Servicio"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="50dp"
+        android:textColor="#F6F6F6" />
+
+
+    <TextView
+        android:id="@+id/tv_seleccionar_servicio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Seleccione el servicio:"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp"
+        android:textColor="#FFFFFF"/>
+
+    <Spinner 
+        android:id="@+id/spinner_servicios"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#E0E0E0"
+        android:textColor="#000000"
+        android:layout_marginBottom="20dp"/>
+
+
+    <TextView
+        android:id="@+id/tv_fecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selecciona la Fecha:"
+        android:textSize="18sp"
+        android:layout_marginBottom="10dp"
+        android:textColor="#FFFFFF" />
+
+    <Button
+        android:id="@+id/btn_fecha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Seleccionar Fecha"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#176E89"
+        android:layout_marginBottom="20dp" />
+
+
+    <TextView
+        android:id="@+id/tv_fecha_seleccionada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fecha seleccionada: "
+        android:textSize="16sp"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="20dp"/>
+
+
+    <TextView
+        android:id="@+id/tv_hora"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selecciona la Hora:"
+        android:textSize="18sp"
+        android:layout_marginBottom="10dp"
+        android:textColor="#FFFFFF" />
+
+    <Button
+        android:id="@+id/btn_hora"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Seleccionar Hora"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#176E89"
+        android:layout_marginBottom="20dp" />
+
+
+    <TextView
+        android:id="@+id/tv_hora_seleccionada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hora seleccionada: "
+        android:textSize="16sp"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="20dp"/>
+
+
+    <Button
+        android:id="@+id/btn_guardar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Confirmar Agendamiento"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#176E89"
+        android:layout_marginTop="24dp"
+        android:padding="16dp"
+        android:textSize="16sp" />
+</LinearLayout>

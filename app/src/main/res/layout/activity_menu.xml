@@ -1,0 +1,48 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/img_1"
+    android:padding="16dp">
+
+    <!-- Saludo -->
+    <TextView
+        android:id="@+id/tv_bienvenido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bienvenido "
+        android:textSize="35sp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:id="@+id/tv_welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="¿qué deseas hacer?"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="30dp" />
+
+    <!-- Botón para agendar una hora -->
+    <Button
+        android:id="@+id/btn_agendar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="agendar una hora"
+        android:backgroundTint="#176E89"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Botón para ver historial de reservas -->
+    <Button
+        android:id="@+id/btn_historial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ver historial de reserva"
+        android:backgroundTint="#176E89"
+        android:textColor="#FFFFFF" />
+</LinearLayout>

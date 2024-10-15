@@ -1,0 +1,62 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp"
+    android:background="@drawable/img_2">
+
+    <!-- Correo Input -->
+    <TextView
+        android:id="@+id/registro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Registro "
+        android:textSize="40sp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp" />
+    <EditText
+        android:id="@+id/et_correo_registro"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_marginTop="16dp"
+        android:hint="Correo Electrónico"
+        android:inputType="textEmailAddress"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#B0BEC5" />
+
+    <!-- Usuario Input -->
+    <EditText
+        android:id="@+id/et_usuario_registro"
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:layout_marginTop="16dp"
+        android:hint="Usuario"
+        android:inputType="text"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#B0BEC5" />
+
+    <!-- Password Input -->
+    <EditText
+        android:id="@+id/et_password_registro"
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:layout_marginTop="16dp"
+        android:hint="Contraseña"
+        android:inputType="textPassword"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#B0BEC5" />
+
+    <!-- Botón de Registro -->
+    <Button
+        android:id="@+id/btn_registrar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Registrar"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#176E89"
+        android:layout_marginTop="24dp" />
+</LinearLayout>
