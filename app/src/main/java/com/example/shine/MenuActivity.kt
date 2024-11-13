@@ -1,10 +1,10 @@
 package com.example.shine
 
-import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import android.widget.Button
+import android.content.Intent
 
 class MenuActivity : AppCompatActivity() {
 
@@ -24,6 +24,16 @@ class MenuActivity : AppCompatActivity() {
         btnAgendarHora.setOnClickListener {
             // Iniciar AgendaActivity
             val intent = Intent(this, AgendaActivity::class.java)
+            startActivity(intent)
+        }
+
+        // Referencia al botón de ver historial de reserva
+        val btnVerHistorial: Button = findViewById(R.id.btn_historial)
+
+        // Establecer un listener para el botón
+        btnVerHistorial.setOnClickListener {
+            // Iniciar VistasActivity
+            val intent = Intent(this, VistasActivity::class.java)
             startActivity(intent)
         }
     }

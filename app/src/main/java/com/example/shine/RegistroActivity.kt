@@ -8,10 +8,11 @@ import androidx.appcompat.app.AppCompatActivity
 
 class RegistroActivity : AppCompatActivity() {
 
-    lateinit var correoInput: EditText
-    lateinit var usuarioInput: EditText
-    lateinit var passwordInput: EditText
-    lateinit var btnRegistrar: Button
+    private lateinit var correoInput: EditText
+    private lateinit var usuarioInput: EditText
+    private lateinit var passwordInput: EditText
+    private lateinit var btnRegistrar: Button
+    private lateinit var dbHelper: DatabaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +24,8 @@ class RegistroActivity : AppCompatActivity() {
         passwordInput = findViewById(R.id.et_password_registro)
         btnRegistrar = findViewById(R.id.btn_registrar)
 
+        // Inicializa el DatabaseHelper
+        dbHelper = DatabaseHelper(this)
 
         btnRegistrar.setOnClickListener {
             // Captura los datos ingresados
@@ -30,13 +33,19 @@ class RegistroActivity : AppCompatActivity() {
             val usuario = usuarioInput.text.toString()
             val password = passwordInput.text.toString()
 
-
             if (correo.isNotEmpty() && usuario.isNotEmpty() && password.isNotEmpty()) {
-                Toast.makeText(this, "Usuario registrado: $usuario", Toast.LENGTH_SHORT).show()
-                finish()
+                // Llama al método addUser para agregar el usuario a la base de datos
+                val isUserAdded = dbHelper.addUser(correo, usuario, password)
+                if (isUserAdded) {
+                    Toast.makeText(this, "Usuario registrado: $usuario", Toast.LENGTH_SHORT).show()
+                    finish() // Finaliza la actividad después del registro exitoso
+                } else {
+                    Toast.makeText(this, "Error al registrar el usuario", Toast.LENGTH_SHORT).show()
+                }
             } else {
                 Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show()
             }
         }
     }
 }
+
