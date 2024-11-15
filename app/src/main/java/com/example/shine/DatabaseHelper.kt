@@ -31,7 +31,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + COLUMN_EMAIL + " TEXT, "
                 + COLUMN_USERNAME + " TEXT, "
-                + COLUMN_PASSWORD + " TEXT)" )
+                + COLUMN_PASSWORD + " TEXT)")
         db?.execSQL(createUsersTable)
 
         val createAppointmentsTable = ("CREATE TABLE " + TABLE_APPOINTMENTS + " ("
@@ -72,19 +72,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         return exists
     }
 
-    fun addAppointment(userId: Int, service: String, date: String, time: String): Boolean {
-        val db = this.writableDatabase
-        val values = ContentValues()
-        values.put(COLUMN_USER_ID, userId)
-        values.put(COLUMN_SERVICE, service)
-        values.put(COLUMN_DATE, date)
-        values.put(COLUMN_TIME, time)
-
-        val result = db.insert(TABLE_APPOINTMENTS, null, values)
-        db.close()
-        return (result != -1L)
-    }
-
     @SuppressLint("Range")
     fun getUserId(username: String): Int {
         val db = this.readableDatabase
@@ -99,6 +86,19 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         return userId
     }
 
+    fun addAppointment(userId: Int, service: String, date: String, time: String): Boolean {
+        val db = this.writableDatabase
+        val values = ContentValues()
+        values.put(COLUMN_USER_ID, userId)
+        values.put(COLUMN_SERVICE, service)
+        values.put(COLUMN_DATE, date)
+        values.put(COLUMN_TIME, time)
+
+        val result = db.insert(TABLE_APPOINTMENTS, null, values)
+        db.close()
+        return (result != -1L)
+    }
+
     @SuppressLint("Range")
     fun getAppointments(): List<String> {
         val appointments = mutableListOf<String>()
@@ -111,11 +111,67 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 val service = cursor.getString(cursor.getColumnIndex(COLUMN_SERVICE))
                 val date = cursor.getString(cursor.getColumnIndex(COLUMN_DATE))
                 val time = cursor.getString(cursor.getColumnIndex(COLUMN_TIME))
-                appointments.add("Servicio: $service\nFecha: $date\nHora: $time")
+                appointments.add("Servicio: $service\nFecha seleccionada: $date\nHora seleccionada: $time")
             } while (cursor.moveToNext())
         }
         cursor.close()
         db.close()
         return appointments
+    }
+
+    @SuppressLint("Range")
+    fun getAppointmentsByUser(username: String): List<String> {
+        val appointments = mutableListOf<String>()
+        val db = this.readableDatabase
+        val userIdQuery = "SELECT $COLUMN_ID FROM $TABLE_USERS WHERE $COLUMN_USERNAME = ?"
+        val cursorUser = db.rawQuery(userIdQuery, arrayOf(username))
+        if (cursorUser.moveToFirst()) {
+            val userId = cursorUser.getInt(cursorUser.getColumnIndex(COLUMN_ID))
+            val query = "SELECT * FROM $TABLE_APPOINTMENTS WHERE $COLUMN_USER_ID = ?"
+            val cursor = db.rawQuery(query, arrayOf(userId.toString()))
+
+            if (cursor.moveToFirst()) {
+                do {
+                    val service = cursor.getString(cursor.getColumnIndex(COLUMN_SERVICE))
+                    val date = cursor.getString(cursor.getColumnIndex(COLUMN_DATE))
+                    val time = cursor.getString(cursor.getColumnIndex(COLUMN_TIME))
+                    appointments.add("Servicio: $service\nFecha seleccionada: $date\nHora seleccionada: $time")
+                } while (cursor.moveToNext())
+            }
+            cursor.close()
+        }
+        cursorUser.close()
+        db.close()
+        return appointments
+    }
+
+    @SuppressLint("Range")
+    fun deleteAppointmentsByUser(username: String): Boolean {
+        val db = this.writableDatabase
+        val userIdQuery = "SELECT $COLUMN_ID FROM $TABLE_USERS WHERE $COLUMN_USERNAME = ?"
+        val cursorUser = db.rawQuery(userIdQuery, arrayOf(username))
+        var isDeleted = false
+        if (cursorUser.moveToFirst()) {
+            val userId = cursorUser.getInt(cursorUser.getColumnIndex(COLUMN_ID))
+            val result = db.delete(TABLE_APPOINTMENTS, "$COLUMN_USER_ID = ?", arrayOf(userId.toString()))
+            isDeleted = result > 0
+        }
+        cursorUser.close()
+        db.close()
+        return isDeleted
+    }
+
+    fun deleteAppointmentById(appointmentId: Int): Boolean {
+        val db = this.writableDatabase
+        val result = db.delete(TABLE_APPOINTMENTS, "$COLUMN_APPOINTMENT_ID = ?", arrayOf(appointmentId.toString()))
+        db.close()
+        return result > 0
+    }
+
+    fun deleteAllAppointments(): Boolean {
+        val db = this.writableDatabase
+        val result = db.delete(TABLE_APPOINTMENTS, null, null)
+        db.close()
+        return result > 0
     }
 }
